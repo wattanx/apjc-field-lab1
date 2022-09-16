@@ -49,74 +49,17 @@ const ImageCard: FC<{ image: Image }> = ({
 };
 
 export const ImageGrid: FC = () => {
+  const { data, error } = useSWR<{ images: Image[] }>("/api/images");
 
-  const data = {
-    images: [
-      {
-        id: "8277aeb6-f3fb-445d-43f9-ae710b3ffc00",
-        previewURL:
-          "https://imagedelivery.net/c_kvDVNdc0jEhXS4gDzgVA/8277aeb6-f3fb-445d-43f9-ae710b3ffc00/blurred",
-        name: "hannah-grace-fk4tiMlDFF0-unsplash.jpg",
-        alt: "string",
-        uploaded: "2021-11-17T06:31:25.203Z",
-        isPrivate: true,
-      },
-      {
-        id: "e45bc50e-814f-4f2a-e6ab-d68a3f457500",
-        previewURL:
-          "https://imagedelivery.net/c_kvDVNdc0jEhXS4gDzgVA/e45bc50e-814f-4f2a-e6ab-d68a3f457500/blurred",
-        name: "parttime-portraits-atOlntWcO4k-unsplash.jpg",
-        alt: "string",
-        uploaded: "2021-11-17T06:32:39.845Z",
-        isPrivate: true,
-      },
-      {
-        id: "4f7fb54c-8469-4be1-eba1-f43f4286e800",
-        previewURL:
-          "https://imagedelivery.net/c_kvDVNdc0jEhXS4gDzgVA/4f7fb54c-8469-4be1-eba1-f43f4286e800/blurred",
-        name: "andrew-schultz-DTSDD968Mpw-unsplash.jpg",
-        alt: "string",
-        uploaded: "2021-11-17T06:33:43.406Z",
-        isPrivate: true,
-      },
-      {
-        id: "59384c25-66ac-4a0e-abf0-381b20c52a00",
-        previewURL:
-          "https://imagedelivery.net/c_kvDVNdc0jEhXS4gDzgVA/59384c25-66ac-4a0e-abf0-381b20c52a00/blurred",
-        name: "david-clarke-sVtcRzphxbk-unsplash.jpg",
-        alt: "string",
-        uploaded: "2021-11-17T06:34:08.727Z",
-        isPrivate: true,
-      },
-      {
-        id: "73d49242-64f0-4fce-c98b-5094a2ce2800",
-        previewURL:
-          "https://imagedelivery.net/c_kvDVNdc0jEhXS4gDzgVA/73d49242-64f0-4fce-c98b-5094a2ce2800/blurred",
-        name: "karsten-winegeart-Qb7D1xw28Co-unsplash.jpg",
-        alt: "string",
-        uploaded: "2021-11-17T06:35:25.795Z",
-        isPrivate: true,
-      },
-      {
-        id: "62fd1c2a-d41b-4256-fff7-8d4e855a7300",
-        previewURL:
-          "https://imagedelivery.net/c_kvDVNdc0jEhXS4gDzgVA/62fd1c2a-d41b-4256-fff7-8d4e855a7300/blurred",
-        name: "bill-stephan-9LkqymZFLrE-unsplash.jpg",
-        alt: "string",
-        uploaded: "2021-11-17T06:59:35.151Z",
-        isPrivate: true,
-      },
-      {
-        id: "91e684d1-940b-443c-b845-b67972fc9e00",
-        previewURL:
-          "https://imagedelivery.net/c_kvDVNdc0jEhXS4gDzgVA/91e684d1-940b-443c-b845-b67972fc9e00/blurred",
-        name: "karsten-winegeart-oU6KZTXhuvk-unsplash.jpg",
-        alt: "string",
-        uploaded: "2021-11-17T06:59:37.854Z",
-        isPrivate: true,
-      },
-    ],
-  };
+  if (error || data === undefined) {
+    return (
+      <div>
+        An unexpected error has occurred when fetching the list of images.
+        Please try again.
+      </div>
+    );
+
+  }
 
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
